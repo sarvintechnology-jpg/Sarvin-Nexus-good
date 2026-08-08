@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Login | Sarvin Nexus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">SN</span>
+      <span class="logo-text">Sarvin Nexus</span>
+    </a>
+    <nav class="nav-desktop" id="navDesktop">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="skills.html" class="nav-link">Skills</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+    <span class="badge-role" id="headerBadge" style="display:none;"></span>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="nav-mobile" id="navMobile">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="skills.html" class="nav-link">Skills</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+</header>
+
+<!-- ================= LOGIN VIEW (single form, role auto-detected) ================= -->
+<section class="auth-wrap reveal" id="loginView">
+  <div class="auth-card auth-card-pop">
+    <h2>Sign In</h2>
+    <p class="auth-sub">One login for everyone. Enter your account and we'll take you to the right place — Admin, Staff or Client.</p>
+
+    <button class="btn btn-google" id="googleLoginBtn">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.9 32.4 29.4 35 24 35c-6.1 0-11-4.9-11-11s4.9-11 11-11c2.8 0 5.3 1 7.3 2.7l5.7-5.7C33.6 6.5 29.1 4.5 24 4.5 13.2 4.5 4.5 13.2 4.5 24S13.2 43.5 24 43.5 43.5 34.8 43.5 24c0-1.2-.1-2.3-.3-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.6 15.9 18.9 13 24 13c2.8 0 5.3 1 7.3 2.7l5.7-5.7C33.6 6.5 29.1 4.5 24 4.5c-7.7 0-14.4 4.4-17.7 10.2z"/><path fill="#4CAF50" d="M24 43.5c5.2 0 9.9-1.9 13.5-5.1l-6.2-5.2C29.2 34.7 26.7 35.5 24 35.5c-5.3 0-9.8-3.6-11.4-8.4l-6.5 5C9.5 38.9 16.2 43.5 24 43.5z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.9 2.5-2.6 4.6-4.7 6l6.2 5.2C40.5 36.1 43.5 30.6 43.5 24c0-1.2-.1-2.3-.3-3.5z"/></svg>
+      Continue with Google
+    </button>
+
+    <div class="auth-divider">or use username / email &amp; password</div>
+
+    <form class="auth-form" id="loginForm">
+      <div class="form-group">
+        <label for="loginEmail">Email (clients) or Username (admin / staff)</label>
+        <input type="text" id="loginEmail" autocomplete="username" placeholder="you@example.com or admin username" required />
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" autocomplete="current-password" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn btn-primary" id="loginSubmitBtn">Sign In</button>
+    </form>
+    <p class="auth-error" id="loginError"></p>
+    <p class="auth-foot">Admins, staff and clients all sign in right here — no need to pick a role.</p>
+  </div>
+</section>
+
+<!-- ================= ADMIN DASHBOARD VIEW ================= -->
+<section class="dash reveal" id="adminDashView" style="display:none;">
+  <div class="container">
+    <div class="dash-top">
+      <h1 class="dash-title">Admin <span>Dashboard</span></h1>
+      <div class="dash-user">
+        <span id="adminEmailLabel"></span>
+        <a href="#" class="logout-link" id="adminLogoutBtn">Log out</a>
+      </div>
+    </div>
+
+    <div class="dash-grid two-col">
+      <!-- CLIENTS PANEL -->
+      <div class="dash-panel reveal">
+        <h3>Clients <span class="count" id="clientCount">0</span></h3>
+        <form class="mini-form" id="createClientForm">
+          <input type="text" id="newClientName" placeholder="Client name" required />
+          <input type="email" id="newClientEmail" placeholder="Client email (for login)" required />
+          <input type="password" id="newClientPassword" placeholder="Temporary password (min 6 chars)" required minlength="6" />
+          <button type="submit" class="btn btn-primary">Create Client</button>
+        </form>
+        <p class="auth-error" id="createClientError"></p>
+        <div class="list" id="clientList"></div>
+      </div>
+
+      <!-- STUDENTS PANEL -->
+      <div class="dash-panel reveal">
+        <h3>Students <span class="count" id="studentCount">0</span></h3>
+        <p class="auth-sub" id="studentPanelHint" style="margin-bottom:14px;">Select a client on the left to view and manage their students.</p>
+        <form class="mini-form" id="createStudentForm" style="display:none;">
+          <input type="text" id="newStudentName" placeholder="Student name" required />
+          <input type="text" id="newStudentClass" placeholder="Class / grade" />
+          <input type="text" id="newStudentRoll" placeholder="Roll number" />
+          <div class="mini-form-actions">
+            <button type="submit" class="btn btn-primary" id="studentFormSubmit">Add Student</button>
+            <button type="button" class="btn btn-outline" id="cancelStudentEdit" style="display:none;">Cancel</button>
+          </div>
+        </form>
+        <p class="auth-error" id="studentFormError"></p>
+        <div class="list" id="studentList"></div>
+      </div>
+    </div>
+
+    <!-- STAFF PANEL -->
+    <div class="dash-panel reveal" style="margin-top:28px;">
+      <h3>Staff <span class="count" id="staffCount">0</span></h3>
+      <p class="auth-sub" style="margin-bottom:14px;">Staff can sign in and view every registered client and student, but can't add, edit or delete anything.</p>
+      <form class="mini-form staff-form-grid" id="createStaffForm">
+        <input type="text" id="newStaffUsername" placeholder="Staff username" required />
+        <input type="password" id="newStaffPassword" placeholder="Temporary password (min 6 chars)" required minlength="6" />
+        <input type="text" id="newStaffDisplayName" placeholder="Display name (optional)" />
+        <button type="submit" class="btn btn-primary" id="staffFormSubmit">Add Staff</button>
+        <button type="button" class="btn btn-outline" id="cancelStaffEdit" style="display:none;">Cancel</button>
+      </form>
+      <p class="auth-error" id="createStaffError"></p>
+      <div class="list" id="staffList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STAFF DASHBOARD VIEW ================= -->
+<section class="dash reveal" id="staffDashView" style="display:none;">
+  <div class="container">
+    <div class="dash-top">
+      <h1 class="dash-title">Staff <span>View</span></h1>
+      <div class="dash-user">
+        <span id="staffEmailLabel"></span>
+        <a href="#" class="logout-link" id="staffLogoutBtn">Log out</a>
+      </div>
+    </div>
+
+    <div class="dash-grid two-col">
+      <div class="dash-panel reveal">
+        <h3>Registered Users <span class="count" id="staffClientCount">0</span></h3>
+        <p class="auth-sub" style="margin-bottom:14px;">Read-only — everyone who has registered as a client.</p>
+        <div class="list" id="staffClientList"></div>
+      </div>
+      <div class="dash-panel reveal">
+        <h3>All Students <span class="count" id="staffStudentCount">0</span></h3>
+        <p class="auth-sub" style="margin-bottom:14px;">Read-only — every student on file, across all clients.</p>
+        <div class="list" id="staffStudentList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLIENT DASHBOARD VIEW ================= -->
+<section class="dash reveal" id="clientDashView" style="display:none;">
+  <div class="container">
+    <div class="dash-top">
+      <h1 class="dash-title">Welcome, <span id="clientNameLabel">Client</span></h1>
+      <div class="dash-user">
+        <span id="clientEmailLabel"></span>
+        <a href="#" class="logout-link" id="clientLogoutBtn">Log out</a>
+      </div>
+    </div>
+
+    <div class="dash-grid">
+      <div class="dash-panel reveal">
+        <h3>Your Students <span class="count" id="clientStudentCount">0</span></h3>
+        <div class="list" id="clientStudentList"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark">SN</span>
+      <span class="logo-text">Sarvin Nexus</span>
+    </a>
+    <p>&copy; <span id="year"></span> Sarvin Nexus. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="common.js"></script>
+<script type="module" src="login.js" async></script>
+</body>
+</html>
+
